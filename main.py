@@ -1,16 +1,23 @@
-# This is a sample Python script.
+import gymnasium
+from PyFlyt.core import Aviary
+# utility
+import wheel
+# math
+import numpy as np
+# gymnasium
+import gymnasium as gym
+import PyFlyt.gym_envs
+# types
+from gymnasium import Env
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+if __name__ == "__main__":
+    env: Env = gymnasium.make("PyFlyt/QuadX-Hover-v4", render_mode="human")
+    obs = env.reset()
 
+    termination: bool = False
+    truncation: bool = False
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    while not termination or truncation:
+        observation, reward, termination, truncation, info = env.step(env.action_space.sample())
